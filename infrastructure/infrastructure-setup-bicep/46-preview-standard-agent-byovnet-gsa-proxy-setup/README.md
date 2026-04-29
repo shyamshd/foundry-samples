@@ -1,4 +1,34 @@
-# 46 - Standard Agent Setup with BYO VNet and GSA Proxy
+# 46 - Standard Agent Setup with BYO VNet and GSA Proxy (Preview)
+
+> **⚠️ PREVIEW FEATURE**
+>
+> The GSA (Global Secure Access) AI Connector proxy used in this setup is currently in **preview**. Features, APIs, and behavior may change before general availability.
+>
+> **To enroll in the GSA AI Connector preview**, <!-- TODO: Add enrollment link/instructions here -->
+>
+> For more information about the GSA AI Connector, see <!-- TODO: Add GSA documentation link here -->
+
+> **IMPORTANT — Subnet Address Range Availability**
+>
+> Class A subnet support (e.g., `10.x.x.x`) is available only in select regions: **Australia East, Brazil South, Canada East, East US, East US 2, France Central, Germany West Central, Italy North, Japan East, South Africa North, South Central US, South India, Spain Central, Sweden Central, UAE North, UK South, West Europe, West US, West US 3.**
+>
+> Class B (`172.16.x.x` – `172.31.x.x`) and Class C (`192.168.x.x`) subnet support is GA and available in all regions supported by Azure AI Foundry Agent Service. This template defaults to Class B addresses (`172.16.0.0/16`).
+>
+> For more on supported regions, see [Models supported by Azure AI Foundry Agent Service](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/concepts/model-region-support?tabs=global-standard).
+
+---
+
+## What is the GSA AI Connector?
+
+The **Global Secure Access (GSA) AI Connector** is an Azure Marketplace virtual appliance that acts as a transparent forward proxy for AI Foundry agent egress traffic. It enables organizations to:
+
+- **Inspect and control outbound traffic** from AI agents to external services
+- **Authenticate egress requests** using managed identity
+- **Enforce compliance policies** on AI agent network communications
+
+The GSA proxy is deployed as a VM in your VNet, and a UDR (User Defined Route) on the agent subnet routes all default (`0.0.0.0/0`) traffic through it. Critical Azure service traffic is exempted via service tag routes.
+
+---
 
 This sample deploys an Azure AI Foundry agent setup with:
 
@@ -11,11 +41,11 @@ This sample deploys an Azure AI Foundry agent setup with:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  Virtual Network (10.0.0.0/16)                                  │
+│  Virtual Network (172.16.0.0/16)                                │
 │                                                                 │
 │  ┌───────────────────────────┐  ┌─────────────────────────────┐ │
-│  │ agent-subnet (10.0.0.0/24)│  │ gsa-proxy-subnet            │ │
-│  │                           │  │ (10.0.1.0/24)               │ │
+│  │ agent-subnet              │  │ gsa-proxy-subnet            │ │
+│  │ (172.16.0.0/24)           │  │ (172.16.1.0/24)             │ │
 │  │  Delegated to             │  │                             │ │
 │  │  Microsoft.App/environments│  │  ┌──────────────────────┐  │ │
 │  │                           │  │  │ GSA Proxy VM          │  │ │
@@ -153,9 +183,9 @@ az deployment group create \
 | `aiServices` | string | `foundry` | AI Services resource name (max 9 chars) |
 | `firstProjectName` | string | `project` | Project resource name |
 | `vnetName` | string | `agent-vnet` | Virtual network name |
-| `vnetAddressPrefix` | string | `10.0.0.0/16` | VNet CIDR |
-| `agentSubnetPrefix` | string | `10.0.0.0/24` | Agent subnet CIDR |
-| `gsaProxySubnetPrefix` | string | `10.0.1.0/24` | GSA proxy subnet CIDR |
+| `vnetAddressPrefix` | string | `172.16.0.0/16` | VNet CIDR |
+| `agentSubnetPrefix` | string | `172.16.0.0/24` | Agent subnet CIDR |
+| `gsaProxySubnetPrefix` | string | `172.16.1.0/24` | GSA proxy subnet CIDR |
 | `gsaProxyVmSize` | string | `Standard_D2s_v3` | Proxy VM size |
 | `gsaProxySshPublicKey` | secure string | *(required)* | SSH public key for VM |
 | `modelName` | string | `gpt-4.1` | Model to deploy |

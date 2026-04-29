@@ -8,11 +8,11 @@ param displayName = 'BYO VNet GSA Proxy Agent Project'
 
 // VNet parameters
 param vnetName = 'agent-vnet'
-param vnetAddressPrefix = '10.0.0.0/16'
+param vnetAddressPrefix = '172.16.0.0/16'
 param agentSubnetName = 'agent-subnet'
-param agentSubnetPrefix = '10.0.0.0/24'
+param agentSubnetPrefix = '172.16.0.0/24'
 param gsaProxySubnetName = 'gsa-proxy-subnet'
-param gsaProxySubnetPrefix = '10.0.1.0/24'
+param gsaProxySubnetPrefix = '172.16.1.0/24'
 
 // GSA Proxy parameters
 param gsaProxyVmSize = 'Standard_D2s_v3'

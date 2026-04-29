@@ -64,15 +64,15 @@ param projectCapHost string = 'caphostproj'
 @description('Name of the virtual network')
 param vnetName string = 'agent-vnet'
 @description('Address space for the VNet')
-param vnetAddressPrefix string = '10.0.0.0/16'
+param vnetAddressPrefix string = '172.16.0.0/16'
 @description('Name of the agent subnet')
 param agentSubnetName string = 'agent-subnet'
 @description('Address prefix for the agent subnet (recommended /24)')
-param agentSubnetPrefix string = '10.0.0.0/24'
+param agentSubnetPrefix string = '172.16.0.0/24'
 @description('Name of the GSA proxy subnet')
 param gsaProxySubnetName string = 'gsa-proxy-subnet'
 @description('Address prefix for the GSA proxy subnet')
-param gsaProxySubnetPrefix string = '10.0.1.0/24'
+param gsaProxySubnetPrefix string = '172.16.1.0/24'
 
 // ---- GSA Proxy parameters ----
 @description('VM size for the GSA proxy VM')
