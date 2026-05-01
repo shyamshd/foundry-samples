@@ -4,9 +4,7 @@
 >
 > The GSA (Global Secure Access) AI Connector proxy used in this setup is currently in **preview**. Features, APIs, and behavior may change before general availability.
 >
-> **To enroll in the GSA AI Connector preview**, <!-- TODO: Add enrollment link/instructions here -->
->
-> For more information about the GSA AI Connector, see <!-- TODO: Add GSA documentation link here -->
+> **To enroll in the GSA AI Connector preview**, fill out the onboarding form: [Securing Foundry Agents in Private Network Deployment with GSA](https://forms.cloud.microsoft/r/Qvn0cSWb42)
 
 > **IMPORTANT — Subnet Address Range Availability**
 >
@@ -23,8 +21,7 @@
 The **Global Secure Access (GSA) AI Connector** is an Azure Marketplace virtual appliance that acts as a transparent forward proxy for AI Foundry agent egress traffic. It enables organizations to:
 
 - **Inspect and control outbound traffic** from AI agents to external services
-- **Authenticate egress requests** using managed identity
-- **Enforce compliance policies** on AI agent network communications
+- **Observe and audit egress requests** all AI agent network communications
 
 The GSA proxy is deployed as a VM in your VNet, and a UDR (User Defined Route) on the agent subnet routes all default (`0.0.0.0/0`) traffic through it. Critical Azure service traffic is exempted via service tag routes.
 
